@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Table from "./components/Table";
 import Pagination from "./components/Pagination";
+import sortData from "./components/_utility";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -9,7 +10,6 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
-  // const [filteredList, setfilteredList] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +21,7 @@ const App = () => {
       })
         .then((res) => res.json())
         .then((json) => {
-          setData(json);
+          setData(sortData(json));
           setLoading(false);
         });
     };
@@ -43,12 +43,10 @@ const App = () => {
     setSearchQuery(term);
   };
 
-  const search = (row) => {
-    let filteredList = row.filter(
-      (row) => row.name.toLowerCase().indexOf(searchQuery) > -1
+  const search = (data) => {
+    return data.filter(
+      (data) => data.name.toLowerCase().indexOf(searchQuery) > -1
     );
-    currentPost = filteredList.slice(indexOfFirstPost, indexOfLastPost);
-    return filteredList;
   };
 
   return (
@@ -58,7 +56,6 @@ const App = () => {
         value={searchQuery}
         onChange={(e) => handleFilterInput(e.target.value)}
       />
-
       <Table data={search(currentPost)} loading={loading} />
       <Pagination
         postsPerPage={postsPerPage}
