@@ -1,18 +1,27 @@
 import React from "react";
+import "./../App.css";
+import Result from "./Result";
 
 const Table = ({ data, loading }) => {
   if (loading) {
     return <h2>this is loading</h2>;
   }
   return (
-    <div>
-      <ul>
+    <table className="results-table">
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Genres</th>
+          <th>Phone</th>
+        </tr>
         {data &&
-          data.map((item) => {
-            return <li key="post.id">{item.name}</li>;
+          data.map((restaurant) => {
+            return <Result data={restaurant} key={restaurant.id} />;
           })}
-      </ul>
-    </div>
+      </tbody>
+    </table>
   );
 };
 

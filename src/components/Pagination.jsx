@@ -7,16 +7,14 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }) {
     pageNumbers.push(i);
   }
 
+  console.log(totalPosts);
+
   console.log(pageNumbers);
   return (
     <div>
       <ul>
         {pageNumbers.map((number) => {
-          return (
-            <li>
-              <button onClick={() => paginate(number)}>{number}</button>
-            </li>
-          );
+          return <button onClick={() => paginate(number)}>{number}</button>;
         })}
       </ul>
     </div>

@@ -8,6 +8,8 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
+  const [searchQuery, setSearchQuery] = useState("");
+  // const [filteredList, setfilteredList] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,19 +28,38 @@ const App = () => {
     fetchData();
   }, []);
 
+  // Pagnation Stuff
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  let currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
+
   const paginate = (number) => {
     setCurrentPage(number);
   };
 
-  // Get Current Post
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
+  //Search Input
+  const handleFilterInput = (e) => {
+    let term = e.toLowerCase();
+    setSearchQuery(term);
+  };
+
+  const search = (row) => {
+    let filteredList = row.filter(
+      (row) => row.name.toLowerCase().indexOf(searchQuery) > -1
+    );
+    currentPost = filteredList.slice(indexOfFirstPost, indexOfLastPost);
+    return filteredList;
+  };
 
   return (
     <div>
-      <h2>Table</h2>
-      <Table data={currentPost} loading={loading} />
+      <input
+        placeholder="enter search"
+        value={searchQuery}
+        onChange={(e) => handleFilterInput(e.target.value)}
+      />
+
+      <Table data={search(currentPost)} loading={loading} />
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data.length}
