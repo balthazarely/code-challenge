@@ -7,8 +7,6 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }) {
     pageNumbers.push(i);
   }
 
-  console.log(totalPosts);
-
   console.log(pageNumbers);
   return (
     <div>
