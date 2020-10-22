@@ -22,9 +22,13 @@ export default function Search({
           onChange={(e) => handleFilterInput(e.target.value)}
         />
         {paginationOn ? (
-          <button onClick={togglePagination}>Pagination On</button>
+          <button style={{ marginLeft: 10 }} onClick={togglePagination}>
+            Pagination On
+          </button>
         ) : (
-          <button onClick={togglePagination}>Pagination Off</button>
+          <button style={{ marginLeft: 10 }} onClick={togglePagination}>
+            Pagination Off
+          </button>
         )}
       </div>
       <div className={styles.wrapper}>

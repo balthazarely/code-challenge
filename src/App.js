@@ -17,7 +17,7 @@ const App = () => {
   const [selectedAttire, setSelectedAttire] = useState("All");
   const [paginationOn, setPaginationOn] = useState(true);
 
-  // Initializeing the data fetch
+  //======== Initializing the data ========//
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -35,7 +35,7 @@ const App = () => {
     fetchData();
   }, []);
 
-  // Pagnation Stuff
+  //======== Pagination Stuff ========//
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   let currentPost;
@@ -55,7 +55,7 @@ const App = () => {
     setCurrentPage(number);
   };
 
-  //Search Input & handlers
+  //======== Search Input & handlers ========//
   const handleFilterInput = (e) => {
     setSearchQuery(e.toLowerCase());
   };
@@ -72,7 +72,7 @@ const App = () => {
     setSelectedAttire(e.target.value);
   };
 
-  // Search Filter
+  //======== Search Filter ========//
   const search = (data) => {
     const excludeColumns = ["telephone", "state"];
     let stateFiltered;
@@ -126,6 +126,7 @@ const App = () => {
       />
       <Table data={search(currentPost)} loading={loading} />
       <Pagination
+        paginationOn={paginationOn}
         postsPerPage={postsPerPage}
         totalPosts={data.length}
         paginate={paginate}
