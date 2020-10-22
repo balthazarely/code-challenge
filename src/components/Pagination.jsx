@@ -9,15 +9,13 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }) {
 
   return (
     <div>
-      <ul>
-        {pageNumbers.map((number) => {
-          return (
-            <button key={number} onClick={() => paginate(number)}>
-              {number}
-            </button>
-          );
-        })}
-      </ul>
+      {pageNumbers.map((number) => {
+        return (
+          <button key={number} onClick={() => paginate(number)}>
+            {number}
+          </button>
+        );
+      })}
     </div>
   );
 }

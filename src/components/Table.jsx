@@ -8,7 +8,7 @@ const Table = ({ data, loading }) => {
     return <h2>this is loading</h2>;
   }
   return (
-    <div>
+    <div className={styles.container}>
       <table className={styles.table}>
         <tbody>
           <tr>
