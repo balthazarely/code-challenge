@@ -72,8 +72,6 @@ const App = () => {
     setSelectedAttire(e.target.value);
   };
 
-  sort;
-
   //======== Search Filter ========//
   const search = (data) => {
     const excludeColumns = ["telephone", "state"];
