@@ -3,7 +3,7 @@ import "./App.css";
 import Table from "./components/Table";
 import Pagination from "./components/Pagination";
 import Search from "./components/Search";
-import sortData from "./components/_utility";
+import sortData from "./components/utilities/utility.jsx";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -11,8 +11,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchBy, setSeachBy] = useState(["name", "city", "genre"]);
-  const [selectedState, setSelectedState] = useState("ALL");
+  const [selectedState, setSelectedState] = useState("All");
   const [selectedGenre, setSelectedGenre] = useState("All");
 
   useEffect(() => {
@@ -33,17 +32,17 @@ const App = () => {
   }, []);
 
   // Pagnation Stuff
+  // To turn pagination back on, just swtich 37-38
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   // let currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
   let currentPost = data;
-  // To turn pagination back on, just swtich 37-38
 
   const paginate = (number) => {
     setCurrentPage(number);
   };
 
-  //Search Input
+  //Search Input & handlers
   const handleFilterInput = (e) => {
     setSearchQuery(e.toLowerCase());
   };
@@ -56,8 +55,12 @@ const App = () => {
     setSelectedGenre(e.target.value);
   };
 
+  // Search Filter
   const search = (data) => {
-    const excludeColumns = ["state"];
+    const excludeColumns = ["telephone", "state"];
+    let stateFiltered;
+    let genreFiltered;
+
     let filtered = data.filter((item) => {
       return Object.keys(item).some((key) =>
         excludeColumns.includes(key)
@@ -66,22 +69,13 @@ const App = () => {
       );
     });
 
-    // let filtered = data.filter(
-    //   (data) => data.name.toLowerCase().indexOf(searchQuery) > -1
-    // );
-
     //Filter by State
-    let stateFiltered;
-    if (selectedState === "ALL") {
+    if (selectedState === "All") {
       stateFiltered = filtered;
     } else {
       stateFiltered = filtered.filter((item) => item.state === selectedState);
     }
-    // console.log(stateFiltered);
-    // return stateFiltered;
-
     // Filter by Genre
-    let genreFiltered;
     if (selectedGenre === "All") {
       genreFiltered = stateFiltered;
     } else {
@@ -89,13 +83,11 @@ const App = () => {
         item.genre.includes(selectedGenre)
       );
     }
-    console.log(genreFiltered);
     return genreFiltered;
   };
 
   return (
     <div className="app">
-      {selectedGenre}
       <Search
         handleFilterInput={handleFilterInput}
         handleStateFilter={handleStateFilter}

@@ -1,5 +1,5 @@
 tr:nth-child(even) {
-  background: #ccc;
+  background: rgb(236, 236, 236);
 }
 
 tr:nth-child(odd) {

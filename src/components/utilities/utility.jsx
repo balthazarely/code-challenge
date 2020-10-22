@@ -1,5 +1,5 @@
 export default function sortData(sortThis) {
   return sortThis.sort((a, b) =>
-    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+    a.state > b.state ? 1 : b.state > a.state ? -1 : 0
   );
 }

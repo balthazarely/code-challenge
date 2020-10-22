@@ -4,11 +4,17 @@
 
 .table {
   width: 1200px;
+  overflow-x: auto;
   text-align: left;
-  border: 2px solid blue;
+  border: 2px solid gray;
   border-collapse: collapse;
 }
 
 td {
   height: 30px;
+}
+
+.wrapper {
+  width: 1200px;
+  text-align: center;
 }
