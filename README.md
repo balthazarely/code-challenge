@@ -2,6 +2,9 @@
 
 To run this application in development mode, please clone the repo and run the following commands.
 
-### `yarn install`
+```
+yarn install
+yarn start
+```
 
-### `yarn start`
+To visit deployed app on GitHub Pages, visit (https://balthazarely.github.io/code-challenge/)
