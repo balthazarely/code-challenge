@@ -6,6 +6,7 @@ import Search from "./components/Search";
 import sortData from "./components/utilities/utility.jsx";
 
 const App = () => {
+  // State Hooks
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,7 +14,10 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedState, setSelectedState] = useState("All");
   const [selectedGenre, setSelectedGenre] = useState("All");
+  const [selectedAttire, setSelectedAttire] = useState("All");
+  const [paginationOn, setPaginationOn] = useState(true);
 
+  // Initializeing the data fetch
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -32,11 +36,20 @@ const App = () => {
   }, []);
 
   // Pagnation Stuff
-  // To turn pagination back on, just swtich 37-38
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // let currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
-  let currentPost = data;
+  let currentPost;
+
+  // Toggle Pagination Button
+  const togglePagination = () => {
+    setPaginationOn(!paginationOn);
+  };
+
+  if (paginationOn) {
+    currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
+  } else {
+    currentPost = data;
+  }
 
   const paginate = (number) => {
     setCurrentPage(number);
@@ -55,11 +68,16 @@ const App = () => {
     setSelectedGenre(e.target.value);
   };
 
+  const handleAttireFilter = (e) => {
+    setSelectedAttire(e.target.value);
+  };
+
   // Search Filter
   const search = (data) => {
     const excludeColumns = ["telephone", "state"];
     let stateFiltered;
     let genreFiltered;
+    let attireFiltered;
 
     let filtered = data.filter((item) => {
       return Object.keys(item).some((key) =>
@@ -83,7 +101,17 @@ const App = () => {
         item.genre.includes(selectedGenre)
       );
     }
-    return genreFiltered;
+
+    // Filter by Attire
+    if (selectedAttire === "All") {
+      attireFiltered = genreFiltered;
+    } else {
+      attireFiltered = genreFiltered.filter((item) =>
+        item.attire.includes(selectedAttire)
+      );
+    }
+
+    return attireFiltered;
   };
 
   return (
@@ -92,6 +120,9 @@ const App = () => {
         handleFilterInput={handleFilterInput}
         handleStateFilter={handleStateFilter}
         handleGenreFilter={handleGenreFilter}
+        handleAttireFilter={handleAttireFilter}
+        togglePagination={togglePagination}
+        paginationOn={paginationOn}
       />
       <Table data={search(currentPost)} loading={loading} />
       <Pagination

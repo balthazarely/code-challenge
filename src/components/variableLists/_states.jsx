@@ -1,6 +1,5 @@
 const states = [
   "All",
-  "AL",
   "CA",
   "CO",
   "FL",

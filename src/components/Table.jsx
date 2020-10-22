@@ -16,7 +16,7 @@ const Table = ({ data, loading }) => {
             <th>City</th>
             <th>State</th>
             <th>Genres</th>
-            <th className={styles.phone}>Phone</th>
+            <th>Phone</th>
           </tr>
           {data &&
             data.map((restaurant) => {
