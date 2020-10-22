@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Result.module.css";
 
 export default function Result({ data }) {
   return (

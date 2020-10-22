@@ -1,0 +1,10 @@
+tr:nth-child(even) {
+  background: #ccc;
+}
+tr:nth-child(odd) {
+  background: #fff;
+}
+
+td:nth-child(4) {
+  font-size: 12px;
+}

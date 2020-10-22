@@ -1,0 +1,14 @@
+.input-wrapper {
+  margin-top: 40px;
+}
+
+.table {
+  width: 1200px;
+  text-align: left;
+  border: 2px solid blue;
+  border-collapse: collapse;
+}
+
+td {
+  height: 30px;
+}

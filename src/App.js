@@ -39,8 +39,7 @@ const App = () => {
 
   //Search Input
   const handleFilterInput = (e) => {
-    let term = e.toLowerCase();
-    setSearchQuery(term);
+    setSearchQuery(e.toLowerCase());
   };
 
   const search = (data) => {
@@ -50,7 +49,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="app">
       <input
         placeholder="enter search"
         value={searchQuery}
